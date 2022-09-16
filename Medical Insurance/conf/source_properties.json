@@ -1,0 +1,35 @@
+{
+  "associate_data": [
+    {
+      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Associate_data_for_Insurance_team- June.xlsb",
+      "sheet_name": "Associate_data_for_Insurance_te",
+      "source_extension": "xlsb",
+      "source_columns": ["S No", "Client Id", "Client Name", "Employee No", "Associate Name", "EmailID", "MobileNo", "Gender", "DOB", "Designation",
+       "Insurance Company Name", "DOJ", "Actual DOL", "Active Status", "Stoppay status", "OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP",
+       "OL_ESIC", "OL CTC", "OL Gross", "SR_BASIC", "SR_DA", "SR_EMPF", "SR_EMPCOMP", "SR_ESIC", "SR CTC", "SR Gross", "SR effective date"],
+      "column_start_row": 2,
+      "attribute_data_types_list": ["char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"date",	"char",	"char",	"date",	"date",	"char",	"char",
+        "char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"date",	"char"],
+      "unique_list": [0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+      "date_key_word": "associate_data"
+    }
+  ],
+  "salary_register": [
+    {
+      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/STAFFING - Final Salary Register - JUN22.xlsb",
+      "sheet_name": "STAFFING SR JUN22",
+      "source_extension": "xlsb",
+      "source_columns":  ["Client ID","Client Name","Employee No","Associate Name","Gender","DOB", "Designation", "DOJ", "ACTUAL DOL", "Active Status",
+        "OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP", "OL_ESIC", "Gross CTC", "Gross Salary", "Basic", "DA", "EMPF", "EMPCOMP",  "Gross Earnings", "DOL"],
+      "column_start_row": 1,
+      "attribute_data_types_list": ["char",	"char",	"char",	"char",	"char",	"date",	"char",	"date",	"date",	"char",	"char",	"char",	"char",	"char",
+        "char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"date"],
+      "unique_list": [0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+      "date_key_word": "salary_register",
+      "rename_columns": {"Client ID":"Client Id", "Client Name":"Client Name", "Employee No":"Employee No", "Associate Name":"Associate Name", "Gender":"Gender", "DOB":"DOB",
+        "Designation":"Designation", "DOJ":"DOJ", "ACTUAL DOL":"Actual DOL", "Active Status":"Active Status", "OL_Basic":"OL_Basic", "OL_DA":"OL_DA", "OL_EMPF":"OL_EMPF",
+        "OL_EMPCOMP":"OL_EMPCOMP", "OL_ESIC":"OL_ESIC", "Gross CTC":"OL CTC", "Gross Salary":"OL Gross", "Basic":"SR_BASIC", "DA":"SR_DA", "EMPF":"SR_EMPF", "EMPCOMP":"SR_EMPCOMP",
+        "Gross Earnings":"SR Gross"}
+    }
+  ]
+}
