@@ -1,1 +1,31 @@
-	
+20-09-2022 10:55:41 PM Error in Get Next Month Addition Function!!!
+Traceback (most recent call last):
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\indexes\base.py", line 3080, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas\_libs\index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 98, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index_class_helper.pxi", line 89, in pandas._libs.index.Int64Engine._check_type
+KeyError: 'ass_doj'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\classifications.py", line 28, in next_month_addition
+    doj_validated_yes['classification'] = doj_validated_yes.apply(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\frame.py", line 7765, in apply
+    return op.get_result()
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\apply.py", line 185, in get_result
+    return self.apply_standard()
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\apply.py", line 276, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\apply.py", line 290, in apply_series_generator
+    results[i] = self.f(v)
+  File "G:\AdventsProduct\Others\Medical Insurance\classifications.py", line 29, in <lambda>
+    lambda x : 'Next Month Addition' if int(str(x['ass_doj'].split("-")[1])) >= int(upload_month) and int(str(x['ass_doj']).split("-")[0]) >= int(upload_year) else ''
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\series.py", line 851, in __getitem__
+    return self._get_value(key)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\series.py", line 959, in _get_value
+    loc = self.index.get_loc(label)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\indexes\base.py", line 3082, in get_loc
+    raise KeyError(key) from err
+KeyError: 'ass_doj'

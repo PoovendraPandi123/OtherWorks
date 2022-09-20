@@ -216,8 +216,8 @@ def get_data_from_file(file_path, sheet_name, source_extension, attribute_list, 
 
             data_proper = data.replace(np.nan, '')
 
-            # print("Data Removed NAN")
-            # print(data_proper)
+            print("Data Removed NAN")
+            print(data_proper)
 
             for k in range(0, len(unique_list)):
                 if unique_list[k] == 1:
@@ -231,8 +231,8 @@ def get_data_from_file(file_path, sheet_name, source_extension, attribute_list, 
             # print(data_proper)
             data_filter.drop("data_length", axis=1, inplace=True)
             #
-            # print("Length Check for Unique")
-            # print(data_filter)
+            print("Length Check for Unique")
+            print(data_filter)
 
             for i in range(0, len(data_filter.columns)):
                 proper_index = i
@@ -244,8 +244,8 @@ def get_data_from_file(file_path, sheet_name, source_extension, attribute_list, 
                 data_filter[data_filter.columns[proper_index]] = data_filter[data_filter.columns[proper_index]].str.replace("\\", "/##/")
 
 
-            # print("Removed Unncessaries")
-            # print(data_filter)
+            print("Removed Unncessaries")
+            print(data_filter)
 
             for j in range(0, len(attribute_data_types_list)):
                 if attribute_data_types_list[j] == "date":
