@@ -47,15 +47,39 @@
       "date_key_word": "mis"
     }
   ],
-  "associate_sr_mis": [
+  "associate_merged_sr_mis_exit_death": [
     {
       "columns": ["ass_client_id", "ass_client_name", "ass_emp_no", "ass_associate_name", "ass_gender", "ass_dob", "ass_designation", "ass_doj", "ass_actual_dol", "ass_active_status",
        "ass_ol_basic", "ass_ol_da", "ass_ol_empf", "ass_ol_emp_comp", "ass_ol_esic", "ass_ol_ctc", "ass_ol_gross", "ass_sr_basic", "ass_sr_da", "ass_sr_empf", "ass_sr_emp_comp",
         "ass_sr_gross", "ass_dol", "ass_sr_ctc", "ass_sr_esic", "ass_email_id", "ass_mobile_number", "ass_ins_comp_name", "ass_stop_pay_status", "ass_sr_effective_date",
         "mis_sl_no", "mis_corp_id", "mis_client_id", "mis_status", "mis_policy_type", "mis_gmc", "mis_gpa", "mis_premium_cost", "mis_billing_type", "mis_ec_industry",
         "mis_ec_industry_sales_force", "mis_ec_rates_for_lombard", "mis_updated_date", "mis_updated_name", "mis_gtl_policy", "mis_remarks_2", "mis_ins_company", "mis_pol_start_date",
-        "mis_pol_end_date", "mis_parental_id", "mis_tpa_name"],
-      "date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date"]
+        "mis_pol_end_date", "mis_parental_id", "mis_tpa_name", "exit_ass_id", "exit_actual_dol", "death_emp_code"],
+      "date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date", "exit_actual_dol"]
+    }
+  ],
+  "exit_report": [
+    {
+      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Exit_Interview_Report (9).csv",
+      "sheet_name": "Exit_Interview_Report (9)",
+      "source_extension": "csv",
+      "source_columns": ["Associate Id", "Employee No", "Actual DOL"],
+      "column_start_row": 2,
+      "attribute_data_types_list": ["char", "char", "date"],
+      "unique_list": [1, 0, 0],
+      "date_key_word": "exit_report"
+    }
+  ],
+  "death_tracker": [
+    {
+      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Death tracker.xlsx",
+      "sheet_name": "2022",
+      "source_extension": "xlsx",
+      "source_columns": ["Emp Code"],
+      "column_start_row": 1,
+      "attribute_data_types_list": ["char"],
+      "unique_list": [1],
+      "date_key_word": "death_tracker"
     }
   ]
 }

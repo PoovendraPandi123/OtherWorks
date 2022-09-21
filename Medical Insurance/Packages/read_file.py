@@ -50,14 +50,24 @@ def convert_format(date_string):
         day_hiffen_tme = ''
         time_and_second = " 00:00:00"
 
-        if re.search('[a-z][A-Z]', date_input):
+        if re.search('[a-z]', date_input) or re.search('[A-Z]', date_input):
             date_input_proper = date_input.lower()
+            # print("date_input_proper", date_input_proper)
             date_value = date_input_proper
-            year_hiffen = date_value.split("-")[2]
-            month_hiffen = date_value.split("-")[0]
-            day_hiffen = date_value.split("-")[1]
+            year_hiffen = date_value.split("-")[2].replace(" ", "")
+            # print("date_value", date_value)
+            if re.search('^[a-z]', date_value.split("-")[0].replace(" ", "")):
+                month_hiffen = date_value.split("-")[0].replace(" ", "")
+                day_hiffen = date_value.split("-")[1].replace(" ", "")
+            elif re.search(r'^[a-z]', date_value.split("-")[1].replace(" ", "")):
+                month_hiffen = date_value.split("-")[1].replace(" ", "")
+                day_hiffen = date_value.split("-")[0].replace(" ", "")
 
-        if re.search("-", date_input) and ( re.search("AM", date_input) or re.search("PM", date_input) ):
+            # print("year_hiffen", year_hiffen)
+            # print("month_hiffen", month_hiffen)
+            # print("day_hiffen", day_hiffen)
+
+        elif re.search("-", date_input) and ( re.search("AM", date_input) or re.search("PM", date_input) ):
             date_input_proper = date_input.replace(" AM", "").replace(" PM", "")
             time_and_second = date_input_proper.split(" ")[1]
             date_value = date_input_proper.split(" ")[0]
@@ -121,6 +131,7 @@ def convert_format(date_string):
             return output_date
 
         if month_hiffen in month_list:
+            # print("month_hiffen_check", month_hiffen)
             year = year_hiffen
             day = day_hiffen
             if len(year_hiffen) == 2:
@@ -132,6 +143,7 @@ def convert_format(date_string):
             return output_date
 
         elif len(year_hiffen) > 0 and len(month_hiffen) > 0 and len(day_hiffen) > 0:
+            # print("month_hiffen_check_1", month_hiffen)
             # print(date_input)
             # print(year_hiffen)
             # print(month_hiffen)
@@ -195,6 +207,8 @@ def get_data_from_file(file_path, sheet_name, source_extension, attribute_list, 
                        source_password, attribute_data_types_list, unique_list, date_key_word):
     try:
 
+        # print("month_list", month_list)
+
         global date_key_word_var
 
         date_key_word_var = date_key_word
@@ -206,7 +220,7 @@ def get_data_from_file(file_path, sheet_name, source_extension, attribute_list, 
 
         data = ''
         if source_extension in ["csv"]:
-            data = pd.read_csv(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, converters=data_column_converter, sheet_name=sheet_name)[attribute_list]
+            data = pd.read_csv(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, converters=data_column_converter)[attribute_list]
         elif source_extension in ["xlsx", "xls"]:
             data = pd.read_excel(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, converters=data_column_converter, sheet_name=sheet_name)[attribute_list]
         elif source_extension in ["xlsb"]:

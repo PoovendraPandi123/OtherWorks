@@ -37,3 +37,39 @@ class Classification:
             print(e)
             logging.error("Error in Get Next Month Addition Function!!!", exc_info=True)
             return ''
+
+    def alcs_deletion(self, data_frame, upload_month, upload_year):
+        try:
+            exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
+            exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
+
+            exit_actual_dol_validated_yes['classification'] = exit_actual_dol_validated_yes.apply(
+                lambda x : 'ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) <= int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) <= int(upload_year) else x['classification'], axis = 1
+            )
+
+            frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
+            result = pd.concat(frames).sort_index()
+
+            return result
+        except Exception as e:
+            print(e)
+            logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+            return ''
+
+    def next_month_alcs_deletion(self, data_frame, upload_month, upload_year):
+        try:
+            exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
+            exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
+
+            exit_actual_dol_validated_yes['classification'] = exit_actual_dol_validated_yes.apply(
+                lambda x: 'Next Month ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) > int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) >= int(upload_year) else x['classification'], axis=1
+            )
+
+            frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
+            result = pd.concat(frames).sort_index()
+
+            return result
+        except Exception as e:
+            print(e)
+            logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+            return ''
