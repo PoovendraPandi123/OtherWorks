@@ -262,9 +262,15 @@ def medical_insurance():
         print("data")
         print(data)
 
+        classification_1_data = ''
+        classification_2_data = ''
+        classification_3_data = ''
+
         if len(data) > 0:
             # Creating one column for a Classification
-            data["classification"] = ''
+            data["classification_1"] = ''
+            data["classification_2"] = ''
+            data["classification_3"] = ''
 
             """  1) No Insurance """
 
@@ -279,6 +285,8 @@ def medical_insurance():
                 # else:
                 #     print("Error in Writing Data Classification No Insurance!!!")
 
+                """ 2) Next Month Addition """
+
                 data_next_month_addition = classification.next_month_addition(data_frame=data_no_insurance, upload_month=7, upload_year=2022)
 
                 if len(data_next_month_addition) > 0:
@@ -287,6 +295,8 @@ def medical_insurance():
                     #     print("Data Classification Next Month Addition Written Successfully!!!")
                     # else:
                     #     print("Error in Writing Data Classification Next Month Addition!!!")
+
+                    """ 3) ALCS Deletion """
 
                     data_alcs_deletion = classification.alcs_deletion(data_frame=data_next_month_addition, upload_month=7, upload_year=2022)
 
@@ -297,16 +307,17 @@ def medical_insurance():
                         # else:
                         #     print("Error in Writing ALCS Deletion")
 
+                        """ 4) Next Month ALCS Deletion """
+
                         data_next_month_alcs_deletion = classification.next_month_alcs_deletion(data_frame=data_alcs_deletion, upload_month=7, upload_year=2022)
 
                         if len(data_next_month_alcs_deletion) > 0:
-                            data_next_month_alcs_deletion_write = get_write_file(data_frame=data_next_month_alcs_deletion, file_name="data3.xlsx", folder_location=excel_write_folder_location)
-                            if data_next_month_alcs_deletion_write:
-                                print("Classification Next Month ALCS Deletion Written Successfully!!!")
-                            else:
-                                print("Error in Writing Next Month ALCS Deletion!!!")
-
-
+                            # data_next_month_alcs_deletion_write = get_write_file(data_frame=data_next_month_alcs_deletion, file_name="data3.xlsx", folder_location=excel_write_folder_location)
+                            # if data_next_month_alcs_deletion_write:
+                            #     print("Classification Next Month ALCS Deletion Written Successfully!!!")
+                            # else:
+                            #     print("Error in Writing Next Month ALCS Deletion!!!")
+                            classification_1_data = data_next_month_alcs_deletion
 
                         else:
                             print("Length of Next Month ALCS Deletion is equals to Zero!!!")
@@ -318,7 +329,21 @@ def medical_insurance():
                 print("Length of Data No Insurance is equals to Zero!!!")
 
 
+            """ Policy Type """
 
+            data_policy_type = classification.policy_type(data_frame=classification_1_data)
+            classification_3_data = data_policy_type
+            if len(data_policy_type) > 0:
+                data_policy_type_write = get_write_file(data_frame=classification_3_data, file_name='data_final.xlsx', folder_location=excel_write_folder_location)
+                if data_policy_type_write:
+                    print("Data Policy Type Written Successfully!!!")
+                else:
+                    print("Error in Writing Policy Type!!!")
+            else:
+                print("Length of Data Policy Type is equals to Zero!!!")
+
+        else:
+            print("Length of Data is equals to Zero!!!")
     except Exception as e:
         print(e)
         logging.error("Error in Medical Insurance Function!!!", exc_info = True)
