@@ -1,85 +1,131 @@
 {
-  "associate_data": [
-    {
-      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Associate_data_for_Insurance_team- June.xlsb",
-      "sheet_name": "Associate_data_for_Insurance_te",
-      "source_extension": "xlsb",
-      "source_columns": ["Client Id", "Client Name", "Employee No", "Associate Name", "EmailID", "MobileNo", "Gender", "DOB", "Designation",
-       "Insurance Company Name", "DOJ", "Actual DOL", "Active Status", "Stoppay status", "OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP",
-       "OL_ESIC", "OL CTC", "OL Gross", "SR_BASIC", "SR_DA", "SR_EMPF", "SR_EMPCOMP", "SR_ESIC", "SR CTC", "SR Gross", "SR effective date"],
-      "column_start_row": 2,
-      "attribute_data_types_list": ["char",	"char",	"char",	"char",	"char",	"char",	"char",	"date",	"char",	"char",	"date",	"date",	"char",	"char",
-        "char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"date"],
-      "unique_list": [0, 0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-      "date_key_word": "associate_data"
-    }
-  ],
-  "salary_register": [
-    {
-      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/STAFFING - Final Salary Register - JUN22.xlsb",
-      "sheet_name": "STAFFING SR JUN22",
-      "source_extension": "xlsb",
-      "source_columns":  ["Client ID","Client Name","Employee No","Associate Name","Gender","DOB", "Designation", "DOJ", "ACTUAL DOL", "Active Status",
-        "OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP", "OL_ESIC", "Gross CTC", "Gross Salary", "Basic", "DA", "EMPF", "EMPCOMP",  "Gross Earnings", "DOL"],
-      "column_start_row": 1,
-      "attribute_data_types_list": ["char",	"char",	"char",	"char",	"char",	"date",	"char",	"date",	"date",	"char",	"char",	"char",	"char",	"char",
-        "char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"date"],
-      "unique_list": [0, 0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-      "date_key_word": "salary_register",
-      "rename_columns": {"Client ID":"Client Id", "Client Name":"Client Name", "Employee No":"Employee No", "Associate Name":"Associate Name", "Gender":"Gender", "DOB":"DOB",
-        "Designation":"Designation", "DOJ":"DOJ", "ACTUAL DOL":"Actual DOL", "Active Status":"Active Status", "OL_Basic":"OL_Basic", "OL_DA":"OL_DA", "OL_EMPF":"OL_EMPF",
-        "OL_EMPCOMP":"OL_EMPCOMP", "OL_ESIC":"OL_ESIC", "Gross CTC":"OL CTC", "Gross Salary":"OL Gross", "Basic":"SR_BASIC", "DA":"SR_DA", "EMPF":"SR_EMPF", "EMPCOMP":"SR_EMPCOMP",
-        "Gross Earnings":"SR Gross"}
-    }
-  ],
-  "mis": [
-    {
-      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Final CRF - MIS 22-23.xlsb",
-      "sheet_name": "TL-Staffing",
-      "source_extension": "xlsb",
-      "source_columns": ["SL No",	"Corp ID",	"ClientID",	"Status",	"Client Name",	"Policy Type",	"GMC",	"GPA",	"Premium Cost",	"Billing Type",	"EC Industry ",
-        "EC Industry - Sales Force",	"EC Rates for Lombard",	"Updated Date",	"Updated Name",	"GTL Policy",	"Remarks 2",	"Insurance Company",	"Policy Start Date",
-        "Policy End Date",	"Parental ID",	"TPA Name"],
-      "column_start_row": 2,
-      "attribute_data_types_list": ["char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",	"char",
-        "char",	"char",	"date",	"date",	"char",	"char"],
-      "unique_list": [1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-      "date_key_word": "mis"
-    }
-  ],
-  "associate_merged_sr_mis_exit_death": [
-    {
-      "columns": ["ass_client_id", "ass_client_name", "ass_emp_no", "ass_associate_name", "ass_gender", "ass_dob", "ass_designation", "ass_doj", "ass_actual_dol", "ass_active_status",
-       "ass_ol_basic", "ass_ol_da", "ass_ol_empf", "ass_ol_emp_comp", "ass_ol_esic", "ass_ol_ctc", "ass_ol_gross", "ass_sr_basic", "ass_sr_da", "ass_sr_empf", "ass_sr_emp_comp",
-        "ass_sr_gross", "ass_dol", "ass_sr_ctc", "ass_sr_esic", "ass_email_id", "ass_mobile_number", "ass_ins_comp_name", "ass_stop_pay_status", "ass_sr_effective_date",
-        "mis_sl_no", "mis_corp_id", "mis_client_id", "mis_status", "mis_policy_type", "mis_gmc", "mis_gpa", "mis_premium_cost", "mis_billing_type", "mis_ec_industry",
-        "mis_ec_industry_sales_force", "mis_ec_rates_for_lombard", "mis_updated_date", "mis_updated_name", "mis_gtl_policy", "mis_remarks_2", "mis_ins_company", "mis_pol_start_date",
-        "mis_pol_end_date", "mis_parental_id", "mis_tpa_name", "exit_ass_id", "exit_actual_dol", "death_emp_code"],
-      "date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date", "exit_actual_dol"]
-    }
-  ],
-  "exit_report": [
-    {
-      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Exit_Interview_Report (9).csv",
-      "sheet_name": "Exit_Interview_Report (9)",
-      "source_extension": "csv",
-      "source_columns": ["Associate Id", "Employee No", "Actual DOL"],
-      "column_start_row": 2,
-      "attribute_data_types_list": ["char", "char", "date"],
-      "unique_list": [1, 0, 0],
-      "date_key_word": "exit_report"
-    }
-  ],
-  "death_tracker": [
-    {
-      "file_path": "H:/Clients/TeamLease/Medical Insurance Recon/2022/01. Advent All file/Death tracker.xlsx",
-      "sheet_name": "2022",
-      "source_extension": "xlsx",
-      "source_columns": ["Emp Code"],
-      "column_start_row": 1,
-      "attribute_data_types_list": ["char"],
-      "unique_list": [1],
-      "date_key_word": "death_tracker"
-    }
-  ]
+	"associate_data": [{
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\1. Associate_data_for_Insurance_team (6).xlsb",
+		"sheet_name": "Associate_data_for_Insurance_te",
+		"source_extension": "xlsb",
+		"source_columns": ["Client Id", "Client Name", "Employee No", "Associate Name", "EmailID", "MobileNo", "Gender", "DOB", "Designation",
+			"Insurance Company Name", "DOJ", "Actual DOL", "Active Status", "Stoppay status", "OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP",
+			"OL_ESIC", "OL CTC", "OL Gross", "SR_BASIC", "SR_DA", "SR_EMPF", "SR_EMPCOMP", "SR_ESIC", "SR CTC", "SR Gross", "SR effective date"
+		],
+		"column_start_row": 2,
+		"attribute_data_types_list": ["char", "char", "char", "char", "char", "char", "char", "date", "char", "char", "date", "date", "char", "char",
+			"char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "date"
+		],
+		"unique_list": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"date_key_word": "associate_data"
+	}],
+	"salary_register": [{
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\2. STAFFING - Salary Register - AUG22.xlsb",
+		"sheet_name": "STAFFING SR AUG22",
+		"source_extension": "xlsb",
+		"source_columns": ["Client ID", "Client Name", "Employee No", "Associate Name", "Gender", "DOB", "Designation", "DOJ", "ACTUAL DOL", "Active Status",
+			"OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP", "OL_ESIC", "Gross CTC", "Gross Salary", "Basic", "DA", "EMPF", "EMPCOMP", "Gross Earnings", "DOL"
+		],
+		"source_columns_var_one": ["Client ID", "Client Name", "Employee No", "Associate Name", "Gender", "DOB", "Designation", "DOJ", "ACTUAL DOL", "Active Status",
+			"OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP", "OL_ESIC", "Gross CTC", "Gross Salary", "Gross Earnings", "DOL"
+		],
+		"missing_columns_list": ["Basic", "DA", "EMPF", "EMPCOMP"],
+		"column_start_row": 1,
+		"attribute_data_types_list": ["char", "char", "char", "char", "char", "date", "char", "date", "date", "char", "char", "char", "char", "char",
+			"char", "char", "char", "char", "char", "char", "char", "char", "date"
+		],
+		"attribute_data_types_list_var_one": ["char", "char", "char", "char", "char", "date", "char", "date", "date", "char", "char", "char", "char", "char",
+			"char", "char", "char", "char", "date"
+		],
+		"unique_list": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"unique_list_var_one": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"date_key_word": "salary_register",
+		"rename_columns": {
+			"Client ID": "Client Id",
+			"Client Name": "Client Name",
+			"Employee No": "Employee No",
+			"Associate Name": "Associate Name",
+			"Gender": "Gender",
+			"DOB": "DOB",
+			"Designation": "Designation",
+			"DOJ": "DOJ",
+			"ACTUAL DOL": "Actual DOL",
+			"Active Status": "Active Status",
+			"OL_Basic": "OL_Basic",
+			"OL_DA": "OL_DA",
+			"OL_EMPF": "OL_EMPF",
+			"OL_EMPCOMP": "OL_EMPCOMP",
+			"OL_ESIC": "OL_ESIC",
+			"Gross CTC": "OL CTC",
+			"Gross Salary": "OL Gross",
+			"Basic": "SR_BASIC",
+			"DA": "SR_DA",
+			"EMPF": "SR_EMPF",
+			"EMPCOMP": "SR_EMPCOMP",
+			"Gross Earnings": "SR Gross"
+		}
+	}],
+	"mis": [{
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\3. MIS Final CRF 22-23.xlsb",
+		"sheet_name": "TL-Staffing",
+		"source_extension": "xlsb",
+		"source_columns": ["SL No", "Corp ID", "ClientID", "Status", "Client Name", "Policy Type", "GMC", "GPA", "Premium Cost", "Billing Type", "EC Industry ",
+			"EC Industry - Sales Force", "New EC rates", "Updated Date", "Updated Name", "GTL Policy", "Remarks 2", "Insurance Company", "Policy Start Date",
+			"Policy End Date", "Parental ID", "TPA Name"
+		],
+		"column_start_row": 2,
+		"attribute_data_types_list": ["char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char",
+			"char", "char", "date", "date", "char", "char"
+		],
+		"unique_list": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"date_key_word": "mis"
+	}],
+	"associate_merged_sr_mis_exit_death": [{
+		"columns": ["Client Id", "Client Name", "Employee No", "Associate Name", "Gender", "DOB", "Designation", "DOJ", "Actual DOL", "Active Status", "OL_Basic", "OL_DA", "OL_EMPF",
+			"OL_EMPCOMP", "OL_ESIC", "OL CTC", "OL Gross", "SR Gross", "DOL", "SR CTC", "SR_ESIC", "EmailID", "MobileNo", "Insurance Company Name", "Stoppay status", "SR_BASIC", "SR_DA",
+			"SR_EMPF", "SR_EMPCOMP", "SR effective date", "SL No", "Corp ID", "ClientID", "Status", "Policy Type", "GMC", "GPA", "Premium Cost", "Billing Type", "EC Industry ", "EC Industry - Sales Force",
+			"New EC rates", "Updated Date", "Updated Name", "GTL Policy", "Remarks 2", "Insurance Company", "Policy Start Date", "Policy End Date", "Parental ID", "TPA Name", "Associate Id",
+			"Actual DOL_y", "Emp Code"
+		],
+		"rename_columns": ["ass_client_id", "ass_client_name", "ass_emp_no", "ass_associate_name", "ass_gender", "ass_dob", "ass_designation", "ass_doj", "ass_actual_dol", "ass_active_status",
+			"ass_ol_basic", "ass_ol_da", "ass_ol_empf", "ass_ol_emp_comp", "ass_ol_esic", "ass_ol_ctc", "ass_ol_gross", "ass_sr_gross", "ass_dol", "ass_sr_ctc", "ass_sr_esic", "ass_email_id", "ass_mobile_number",
+			"ass_ins_comp_name", "ass_stop_pay_status", "ass_sr_basic", "ass_sr_da", "ass_sr_empf", "ass_sr_emp_comp", "ass_sr_effective_date",
+			"mis_sl_no", "mis_corp_id", "mis_client_id", "mis_status", "mis_policy_type", "mis_gmc", "mis_gpa", "mis_premium_cost", "mis_billing_type", "mis_ec_industry",
+			"mis_ec_industry_sales_force", "mis_new_ec_rates", "mis_updated_date", "mis_updated_name", "mis_gtl_policy", "mis_remarks_2", "mis_ins_company", "mis_pol_start_date",
+			"mis_pol_end_date", "mis_parental_id", "mis_tpa_name", "exit_ass_id", "exit_actual_dol", "death_emp_code"
+		],
+		"date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date", "exit_actual_dol"]
+	}],
+	"exit_report": [{
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\6. Exit_Interview_Report (7).csv",
+		"sheet_name": "Exit_Interview_Report (9)",
+		"source_extension": "csv",
+		"source_columns": ["Associate Id", "Employee No", "Actual DOL"],
+		"column_start_row": 2,
+		"attribute_data_types_list": ["char", "char", "date"],
+		"unique_list": [1, 0, 0],
+		"date_key_word": "exit_report"
+	}],
+	"death_tracker": [{
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\5. Death Report.xlsx",
+		"sheet_name": "Sheet1",
+		"source_extension": "xlsx",
+		"source_columns": ["Emp Code"],
+		"column_start_row": 1,
+		"attribute_data_types_list": ["char"],
+		"unique_list": [1],
+		"date_key_word": "death_tracker"
+	}],
+	"insurance_companies": [
+		{
+			"insurance_company": "United India Insurance Company Limited",
+			"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\4. United.xlsb",
+			"sheet_name": "Staffing",
+			"source_extension": "xlsb",
+			"source_columns": ["Sl No", "Emp Code", "Employee/Dependent Name", "Relation", "Gender", "DOB", "Client ID", "Client Name", "D.O.J", "Type", "GMC", "GPA",
+				"Remarks", "Policy DOJ", "Age", "Gross Salary", "Mailing ID", "MobileNo", "DOL", "Policy DOL", "Deln Remarks", "Clarification", "Classification"
+			],
+			"column_start_row": 1,
+			"attribute_data_types_list": ["char", "char", "char", "char", "char", "date", "char", "char", "date", "char", "char", "char", "char", "date", "char", "char",
+				"char", "char", "date", "date", "char", "char", "char"
+			],
+			"unique_list": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			"date_key_word": "united_insurance"
+		}
+	]
 }

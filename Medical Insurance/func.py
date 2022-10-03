@@ -28,6 +28,34 @@ def get_data(**kwargs):
 
         if read_data["Status"] == "Success":
             return read_data["data"]
+        elif read_data["Status"] == "Error" and re.search(r'usecols do not match', read_data["Message"].lower()):
+
+            print("Trying Variation One!!!")
+
+            read_data_var_one = rf.get_data_from_file(
+                file_path = kwargs["file_path"],
+                sheet_name = kwargs["sheet_name"],
+                source_extension = kwargs["source_extension"],
+                attribute_list = kwargs["attribute_list_var_one"],
+                column_start_row = kwargs["column_start_row"],
+                password_protected = '',
+                source_password = '',
+                attribute_data_types_list = kwargs["attribute_data_types_list_var_one"],
+                unique_list = kwargs["unique_list_var_one"],
+                date_key_word = ''
+            )
+
+            print("Variation One Output!!!")
+            print(read_data_var_one)
+
+            if read_data_var_one["Status"] == "Success":
+
+                for column in kwargs["missing_columns_list"]:
+                    read_data_var_one[column] = 'NA'
+
+                return read_data_var_one["data"]
+            else:
+                return None
         else:
             return None
     except Exception as e:
@@ -46,7 +74,9 @@ def get_read_proper_data(file_location):
 
         data_frame = pd.read_excel(file_location, converters=data_column_converter)
 
-        return data_frame
+        data_frame_proper = data_frame.replace(np.nan, '')
+
+        return data_frame_proper
     except Exception as e:
         print(e)
         logging.error("Error in Get Read Proper Data Function!!!", exc_info=True)
@@ -74,7 +104,7 @@ def get_write_file(data_frame, file_name, folder_location):
     except Exception as e:
         print(e)
         logging.error("Error in Get Write File Function!!!", exc_info=True)
-        return None
+        return False
 
 def create_new_column(data_frame, data_frame_series_tuple, new_column_name_tuple):
     try:
@@ -115,3 +145,5 @@ def get_date_difference(date_string_1, date_string_2):
         print(e)
         logging.error("Error in Get Date Difference!!!", exc_info=True)
         return None
+
+# print(get_date_difference('2022-06-30 00:00:00', '2022-07-01 00:00:00'))
