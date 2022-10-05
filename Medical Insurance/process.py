@@ -836,15 +836,16 @@ def medical_insurance_deletion():
         print(e)
         logging.error("Error in Medical Insurance Deletion Function!!!", exc_info=True)
 
-def medical_insurance_addition_and_deletion():
+def medical_insurance():
     try:
         excel_write_folder_location = "G:/AdventsProduct/Others/A-Testing/Medical Insurance/august-2022/03102022"
 
         data = get_read_proper_data(file_location="G:/AdventsProduct/Others/A-Testing/Medical Insurance/august-2022/03102022/med_ins_aug_22_data_deletion.xlsx")
+        inception_data = get_read_proper_data(file_location="G:/AdventsProduct/Others/A-Testing/Medical Insurance/august-2022/03102022/inception_united_aug_2022_proper.xlsx")
 
         classification = Classification()
 
-        data_addition_and_deletion = classification.addition_and_deletion(data_frame=data)
+        data_addition_and_deletion = classification.addition_and_deletion(data_frame=data, inception_data_frame=inception_data, upload_month=8, upload_year=2022)
 
         if get_write_file(data_frame=data_addition_and_deletion, file_name="med_ins_aug_22_data_addition_and_deletion.xlsx", folder_location=excel_write_folder_location):
             print("Success")
@@ -892,4 +893,22 @@ def medical_insurance_next_month_addition():
 
     except Exception as e:
         print(e)
-        logging.error("Error in Medical Insurance Next Month Addition Function!!!")
+        logging.error("Error in Medical Insurance Next Month Addition Function!!!", exc_info=True)
+
+def medical_insurance_next_month_deletion():
+    try:
+        excel_write_folder_location = "G:/AdventsProduct/Others/A-Testing/Medical Insurance/august-2022/03102022"
+        data = get_read_proper_data(file_location="G:/AdventsProduct/Others/A-Testing/Medical Insurance/august-2022/03102022/med_ins_aug_22_data_next_month_addition.xlsx")
+
+        classification = Classification()
+
+        data_next_month_deletion = classification.next_month_deletion(data_frame=data, upload_month=8, upload_year=2022)
+
+        if get_write_file(data_frame=data_next_month_deletion, file_name="med_ins_aug_22_data_next_month_deletion.xlsx", folder_location=excel_write_folder_location):
+            print("Success")
+        else:
+            print("Error")
+
+    except Exception as e:
+        print(e)
+        logging.error("Error in Medical Insurance Next Month Deletion Function!!!", exc_info=True)

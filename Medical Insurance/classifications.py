@@ -155,23 +155,29 @@ class Classification:
             logging.error("Error in Deletion Function!!!", exc_info=True)
             return ''
 
-    def addition_and_deletion(self, data_frame):
+    def addition_and_deletion(self, data_frame, inception_data_frame, upload_month, upload_year):
         try:
             def get_addition_and_deletion(data_dict):
                 try:
-                    if data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
-                        if data_dict["ass_active_status"].lower() in ["inactive"]:
+                    if data_dict["ass_emp_no"] not in inception_data_emp_list:
+                        if data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
+                            if data_dict["ass_active_status"].lower() in ["inactive"]:
 
-                            actual_dol_month = int(data_dict["ass_actual_dol"].split("-")[1])
-                            actual_dol_year = int(data_dict["ass_actual_dol"].split("-")[0])
+                                actual_dol_month = int(data_dict["ass_actual_dol"].split("-")[1])
+                                actual_dol_year = int(data_dict["ass_actual_dol"].split("-")[0])
 
-                            policy_start_date_month = int(data_dict["mis_pol_start_date"].split("-")[1])
-                            policy_start_date_year = int(data_dict["mis_pol_start_date"].split("-")[0])
+                                policy_start_date_month = int(data_dict["mis_pol_start_date"].split("-")[1])
+                                policy_start_date_year = int(data_dict["mis_pol_start_date"].split("-")[0])
 
-                            if ( actual_dol_month >= policy_start_date_month and  actual_dol_year >= policy_start_date_year):
-                                if ( data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"] ) and \
-                                        not ( data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"] ) :
-                                    return 'Addition and Deletion'
+                                if actual_dol_month == int(upload_month) and actual_dol_year == int(upload_year):
+                                    if ( actual_dol_month >= policy_start_date_month and  actual_dol_year >= policy_start_date_year):
+                                        if ( data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"] ) and \
+                                                not ( data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"] ) :
+                                            return 'Addition and Deletion'
+                                        else:
+                                            return data_dict['classification_1']
+                                    else:
+                                        return data_dict['classification_1']
                                 else:
                                     return data_dict['classification_1']
                             else:
@@ -185,6 +191,11 @@ class Classification:
                     print(e)
                     logging.error("Error in Get Addition and Deletion Function of Addition and Deletion Function!!!", exc_info=True)
                     return ''
+
+            inception_data_emp_list = []
+
+            for index, rows in inception_data_frame.iterrows():
+                inception_data_emp_list.append(rows['Emp Code'])
 
             data_frame['classification_1'] = data_frame.apply(
                 lambda x : get_addition_and_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
@@ -201,7 +212,7 @@ class Classification:
 
             def get_check_reactivation(data_dict):
                 try:
-                    if data_dict["ass_emp_no"].lower() in ["active"] and data_dict["ass_actual_dol_validate_Yes_or_No"] == "No":
+                    if data_dict["ass_active_status"].lower() in ["active"] and data_dict["ass_actual_dol_validate_Yes_or_No"] == "No":
                         if data_dict["ass_emp_no"] in inception_data_emp_list:
                             if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["status"].lower() in ["inactive"]:
                                 return 'Reactivation'
@@ -251,6 +262,7 @@ class Classification:
                 except Exception as e:
                     print(e)
                     logging.error("Error in Get Check Next Month Addition Function in Next Month Addition Function!!!", exc_info=True)
+                    return ''
 
 
             data_frame['classification_1'] = data_frame.apply(
@@ -262,6 +274,51 @@ class Classification:
             print(e)
             logging.error("Error in Next Month Addition Function!!!", exc_info=True)
             return ''
+
+    def next_month_deletion(self, data_frame, upload_month, upload_year):
+        try:
+
+            def get_check_next_month_deletion(data_dict):
+                try:
+                    if data_dict["ass_active_status"].lower() in ["inactive"] and data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
+                        if int(data_dict['ass_actual_dol'].split("-")[1]) > int(upload_month) and int(data_dict['ass_actual_dol'].split("-")[0]) >= upload_year:
+                            return 'Next Month Deletion'
+                        else:
+                            return data_dict['classification_1']
+                    else:
+                        return data_dict['classification_1']
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Get Check Next Month Deletion Function in Next Month Deletion Function!!!", exc_info=True)
+                    return ''
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x : get_check_next_month_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+            )
+
+            return data_frame
+        except Exception as e:
+            print(e)
+            logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
+            return ''
+
+    # def next_month_deletion_1(self, data_frame, upload_month, upload_year):
+    #     try:
+    #
+    #         actual_dol_validated_yes = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'Yes']
+    #         actual_dol_validated_no = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'No']
+    #
+    #         actual_dol_validated_yes['classification_1'] = actual_dol_validated_yes.apply(
+    #             lambda x : 'Next Month Deletion' if int(str(x['ass_dol']).split("-")[1]) >= int(upload_month) and int(str(x['ass_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
+    #         )
+    #
+    #         frames = [actual_dol_validated_yes, actual_dol_validated_no]
+    #         result = pd.concat(frames).sort_index()
+    #
+    #         return result
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
 
     # def next_month_addition_1(self, data_frame, upload_month, upload_year):
     #     try:
@@ -344,24 +401,6 @@ class Classification:
             print(e)
             logging.error("Error in Addition Function!!!", exc_info=True)
             return ''
-
-    def next_month_deletion(self, data_frame, upload_month, upload_year):
-        try:
-
-            actual_dol_validated_yes = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'Yes']
-            actual_dol_validated_no = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'No']
-
-            actual_dol_validated_yes['classification_1'] = actual_dol_validated_yes.apply(
-                lambda x : 'Next Month Deletion' if int(str(x['ass_dol']).split("-")[1]) >= int(upload_month) and int(str(x['ass_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
-            )
-
-            frames = [actual_dol_validated_yes, actual_dol_validated_no]
-            result = pd.concat(frames).sort_index()
-
-            return result
-        except Exception as e:
-            print(e)
-            logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
 
     def alcs_deletion(self, data_frame, upload_month, upload_year):
         try:
