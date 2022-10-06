@@ -11,7 +11,7 @@ class Classification:
     def no_insurance(self, data_frame):
         try:
             data_frame['classification_1'] = data_frame.apply(
-                lambda x: 'No Insurance' if re.search(r'noinsurance', str(x['mis_ins_company']).replace(" ", "").lower()) else x['classification_1'], axis=1
+                lambda x: 'No Insurance' if re.search(r'noinsurance', str(x['mis_ins_company']).replace(" ", "").lower()) and x['classification_1'] == '' else x['classification_1'], axis=1
             )
             return data_frame
 
@@ -58,7 +58,7 @@ class Classification:
             # return result
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_prior_to_policy(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_check_prior_to_policy(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -111,7 +111,7 @@ class Classification:
                 inception_data_emp_list.append(rows['Emp Code'])
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_live(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_live(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -146,7 +146,7 @@ class Classification:
                 inception_data_emp_list.append(rows['Emp Code'])
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_check_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -198,7 +198,7 @@ class Classification:
                 inception_data_emp_list.append(rows['Emp Code'])
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_addition_and_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_addition_and_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -207,150 +207,25 @@ class Classification:
             logging.error("Error in Addition and Deletion Function!!!", exc_info=True)
             return ''
 
-    def reactivation(self, data_frame, inception_data_frame):
-        try:
-
-            def get_check_reactivation(data_dict):
-                try:
-                    if data_dict["ass_active_status"].lower() in ["active"] and data_dict["ass_actual_dol_validate_Yes_or_No"] == "No":
-                        if data_dict["ass_emp_no"] in inception_data_emp_list:
-                            if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["status"].lower() in ["inactive"]:
-                                return 'Reactivation'
-                            else:
-                                return data_dict["classification_1"]
-                        else:
-                            return data_dict["classification_1"]
-                    else:
-                        return data_dict["classification_1"]
-
-                except Exception as e:
-                    print(e)
-                    logging.error("Error in Reactivation Function!!!", exc_info=True)
-                    return ''
-
-            inception_data_emp_list = []
-            inception_data_emp_status_list = []
-
-            for index, rows in inception_data_frame.iterrows():
-                data_dict = {"emp_no": rows['Emp Code'], 'status': rows['Status']}
-                inception_data_emp_status_list.append(data_dict)
-                inception_data_emp_list.append(rows['Emp Code'])
-
-            data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_reactivation(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
-            )
-
-            return data_frame
-        except Exception as e:
-            print(e)
-            logging.error("Error in Reactivation Function!!!", exc_info=True)
-            return ''
-
-    def next_month_addition(self, data_frame, upload_month, upload_year):
-        try:
-
-            def get_check_next_month_addition(data_dict):
-                try:
-                    if data_dict['ass_doj_validate_Yes_or_No'].lower() == "yes":
-                        if int(data_dict['ass_doj'].split("-")[1]) > int(upload_month) and int(data_dict['ass_doj'].split("-")[0]) >= int(upload_year):
-                            return 'Next Month Addition'
-                        else:
-                            return data_dict["classification_1"]
-                    else:
-                        return data_dict["classification_1"]
-
-                except Exception as e:
-                    print(e)
-                    logging.error("Error in Get Check Next Month Addition Function in Next Month Addition Function!!!", exc_info=True)
-                    return ''
-
-
-            data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_next_month_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
-            )
-
-            return data_frame
-        except Exception as e:
-            print(e)
-            logging.error("Error in Next Month Addition Function!!!", exc_info=True)
-            return ''
-
-    def next_month_deletion(self, data_frame, upload_month, upload_year):
-        try:
-
-            def get_check_next_month_deletion(data_dict):
-                try:
-                    if data_dict["ass_active_status"].lower() in ["inactive"] and data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
-                        if int(data_dict['ass_actual_dol'].split("-")[1]) > int(upload_month) and int(data_dict['ass_actual_dol'].split("-")[0]) >= upload_year:
-                            return 'Next Month Deletion'
-                        else:
-                            return data_dict['classification_1']
-                    else:
-                        return data_dict['classification_1']
-                except Exception as e:
-                    print(e)
-                    logging.error("Error in Get Check Next Month Deletion Function in Next Month Deletion Function!!!", exc_info=True)
-                    return ''
-
-            data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_next_month_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
-            )
-
-            return data_frame
-        except Exception as e:
-            print(e)
-            logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
-            return ''
-
-    # def next_month_deletion_1(self, data_frame, upload_month, upload_year):
-    #     try:
-    #
-    #         actual_dol_validated_yes = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'Yes']
-    #         actual_dol_validated_no = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'No']
-    #
-    #         actual_dol_validated_yes['classification_1'] = actual_dol_validated_yes.apply(
-    #             lambda x : 'Next Month Deletion' if int(str(x['ass_dol']).split("-")[1]) >= int(upload_month) and int(str(x['ass_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
-    #         )
-    #
-    #         frames = [actual_dol_validated_yes, actual_dol_validated_no]
-    #         result = pd.concat(frames).sort_index()
-    #
-    #         return result
-    #     except Exception as e:
-    #         print(e)
-    #         logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
-
-    # def next_month_addition_1(self, data_frame, upload_month, upload_year):
-    #     try:
-    #         doj_validated_yes = data_frame[data_frame['ass_doj_validate_Yes_or_No'] == 'Yes']
-    #         doj_validated_no = data_frame[data_frame['ass_doj_validate_Yes_or_No'] == 'No']
-    #
-    #         doj_validated_yes['classification_1'] = doj_validated_yes.apply(
-    #             lambda x : 'Next Month Addition' if int(str(x['ass_doj'].split("-")[1])) >= int(upload_month) and int(str(x['ass_doj']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
-    #         )
-    #
-    #         frames = [doj_validated_yes, doj_validated_no]
-    #         result = pd.concat(frames).sort_index()
-    #
-    #         return result
-    #     except Exception as e:
-    #         print(e)
-    #         logging.error("Error in Get Next Month Addition Function!!!", exc_info=True)
-    #         return ''
-
     def already_deletion(self, data_frame, inception_data_frame):
         try:
 
             def get_already_deletion(data_dict):
                 try:
-                    if data_dict['classification_1'] in ['Deletion', 'Addition and Deletion']:
+                    if data_dict['classification_1'] in ['Deletion', 'Addition and Deletion', '']:
                         if data_dict['ass_emp_no'] in inception_data_emp_list:
-                            if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["classification"].lower() in \
-                                    ["Deletion", "Addition and Deletion", "Already Deletion"]:
-                                return 'Already Deletion'
+                            if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["classification"] in ["Deletion", "Addition and Deletion", "Already Deletion"]:
+                                if data_dict['ass_actual_dol_validate_Yes_or_No'].lower() == 'yes':
+                                    return 'Already Deletion'
+                                else:
+                                    return data_dict['classification_1']
+                            else:
+                                return data_dict['classification_1']
+                        else:
                             return data_dict['classification_1']
+                    else:
                         return data_dict['classification_1']
-                    return data_dict['classification_1']
+
                 except Exception as e:
                     print(e)
                     logging.error("Error in Get Already Deletion Function of Already Deletion!!!", exc_info=True)
@@ -393,7 +268,7 @@ class Classification:
             inception_data_employee_list = inception_data_frame["Emp Code"].tolist()
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -402,40 +277,165 @@ class Classification:
             logging.error("Error in Addition Function!!!", exc_info=True)
             return ''
 
-    def alcs_deletion(self, data_frame, upload_month, upload_year):
+    def reactivation(self, data_frame, inception_data_frame):
         try:
-            exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
-            exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
 
-            exit_actual_dol_validated_yes['classification_1'] = exit_actual_dol_validated_yes.apply(
-                lambda x : 'ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) <= int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) <= int(upload_year) else x['classification_1'], axis = 1
+            def get_check_reactivation(data_dict):
+                try:
+                    if data_dict["ass_active_status"].lower() in ["active"] and data_dict["ass_actual_dol_validate_Yes_or_No"] == "No":
+                        if data_dict["ass_emp_no"] in inception_data_emp_list:
+                            if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["status"].lower() in ["inactive"]:
+                                return 'Reactivation'
+                            else:
+                                return data_dict["classification_1"]
+                        else:
+                            return data_dict["classification_1"]
+                    else:
+                        return data_dict["classification_1"]
+
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Reactivation Function!!!", exc_info=True)
+                    return ''
+
+            inception_data_emp_list = []
+            inception_data_emp_status_list = []
+
+            for index, rows in inception_data_frame.iterrows():
+                data_dict = {"emp_no": rows['Emp Code'], 'status': rows['Status']}
+                inception_data_emp_status_list.append(data_dict)
+                inception_data_emp_list.append(rows['Emp Code'])
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x : get_check_reactivation(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
-            frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
-            result = pd.concat(frames).sort_index()
-
-            return result
+            return data_frame
         except Exception as e:
             print(e)
-            logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+            logging.error("Error in Reactivation Function!!!", exc_info=True)
+            return ''
+
+    def next_month_addition(self, data_frame, upload_month, upload_year):
+        try:
+
+            def get_check_next_month_addition(data_dict):
+                try:
+                    if data_dict['ass_doj_validate_Yes_or_No'].lower() == "yes":
+                        if int(data_dict['ass_doj'].split("-")[1]) > int(upload_month) and int(data_dict['ass_doj'].split("-")[0]) >= int(upload_year):
+                            return 'Next Month Addition'
+                        else:
+                            return data_dict["classification_1"]
+                    else:
+                        return data_dict["classification_1"]
+
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Get Check Next Month Addition Function in Next Month Addition Function!!!", exc_info=True)
+                    return ''
+
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x : get_check_next_month_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
+            )
+
+            return data_frame
+        except Exception as e:
+            print(e)
+            logging.error("Error in Next Month Addition Function!!!", exc_info=True)
+            return ''
+
+    def next_month_deletion(self, data_frame, upload_month, upload_year):
+        try:
+
+            def get_check_next_month_deletion(data_dict):
+                try:
+                    if data_dict["ass_active_status"].lower() in ["inactive"] and data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
+                        if int(data_dict['ass_actual_dol'].split("-")[1]) > int(upload_month) and int(data_dict['ass_actual_dol'].split("-")[0]) >= upload_year:
+                            return 'Next Month Deletion'
+                        else:
+                            return data_dict['classification_1']
+                    else:
+                        return data_dict['classification_1']
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Get Check Next Month Deletion Function in Next Month Deletion Function!!!", exc_info=True)
+                    return ''
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x : get_check_next_month_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
+            )
+
+            return data_frame
+        except Exception as e:
+            print(e)
+            logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
+            return ''
+
+    def alcs_deletion(self, data_frame, upload_month, upload_year):
+        try:
+
+            def get_check_alcs_deletion(data_dict):
+                try:
+                    if data_dict['ass_active_status'].lower() in ['inactive']:
+                        if data_dict['exit_actual_dol_validate_Yes_or_No'].lower() == "yes":
+                            if int(data_dict['exit_actual_dol'].split("-")[1]) <= int(upload_month):
+                                if int(data_dict['exit_actual_dol'].split("-")[0]) <= int(upload_year):
+                                    return 'ALCS Deletion'
+                                else:
+                                    return data_dict['classification_1']
+                            else:
+                                return data_dict['classification_1']
+                        else:
+                            return data_dict['classification_1']
+                    else:
+                        return data_dict['classification_1']
+
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Get Check ALCS Deletion Function in ALCS Deletion Function!!!", exc_info=True)
+                    return ''
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x : get_check_alcs_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
+            )
+
+            return data_frame
+        except Exception as e:
+            print(e)
+            logging.error("Error in ALCS Deletion Function!!!", exc_info=True)
             return ''
 
     def next_month_alcs_deletion(self, data_frame, upload_month, upload_year):
         try:
-            exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
-            exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
 
-            exit_actual_dol_validated_yes['classification_1'] = exit_actual_dol_validated_yes.apply(
-                lambda x: 'Next Month ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) > int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis=1
+            def get_check_next_month_alcs_deletion(data_dict):
+                try:
+                    if data_dict['ass_active_status'].lower() in ['inactive']:
+                        if data_dict['exit_actual_dol_validate_Yes_or_No'].lower() == "yes":
+                            if int(data_dict['exit_actual_dol'].split("-")[1]) > int(upload_month):
+                                if int(data_dict['exit_actual_dol'].split("-")[0]) <= int(upload_year):
+                                    return 'Next Month ALCS Deletion'
+                                else:
+                                    return data_dict['classification_1']
+                            else:
+                                return data_dict['classification_1']
+                        else:
+                            return data_dict['classification_1']
+                    else:
+                        return data_dict['classification_1']
+                except Exception as e:
+                    print(e)
+                    logging.error("Error in Get Check Next Month ALCS Deletion Function in Next Month ALCS Deletion Function!!!", exc_info=True)
+
+            data_frame['classification_1'] = data_frame.apply(
+                lambda x: get_check_next_month_alcs_deletion(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis=1
             )
 
-            frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
-            result = pd.concat(frames).sort_index()
-
-            return result
+            return data_frame
         except Exception as e:
             print(e)
-            logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+            logging.error("Error in Next Month ALCS Deletion!!!", exc_info=True)
             return ''
 
     def migration_addition(self, data_frame, inception_data_frame):
@@ -447,8 +447,8 @@ class Classification:
                         if data_dict['ass_emp_no'] in inception_data_emp_list:
                             if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["gmc"] != data_dict["mis_gmc"] or \
                                     inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["gpa"] != data_dict["mis_gpa"] or \
-                                    inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["policy_type"].lower() != data_dict["mis_policy_type"].lower():
-                                'Migration Addition'
+                                    inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["policy_type"].lower() != data_dict["policy_type_proper"].lower():
+                                return 'Migration Addition'
                             return data_dict['classification_1']
                         return data_dict['classification_1']
                     return data_dict['classification_1']
@@ -465,7 +465,7 @@ class Classification:
                     "emp_no": rows['Emp Code'],
                     'classification': rows['Classification'],
                     'client_id': rows["Client ID"],
-                    "policy_type": rows["Type"],
+                    "policy_type": rows["policy_type_proper"],
                     "gmc": rows["GMC"],
                     "gpa": rows["GPA"]
                 }
@@ -473,7 +473,7 @@ class Classification:
                 inception_data_emp_list.append(rows['Emp Code'])
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_migration_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
+                lambda x : get_migration_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
             )
 
             return data_frame
@@ -501,39 +501,123 @@ class Classification:
                 lambda x : 'EC/WC' if ( str(x['ass_ol_emp_comp']).replace(" ", "").replace("NA", "").replace("0", "") != '' or str(x['ass_sr_emp_comp']).replace(" ", "").replace("NA", "").replace("0", "") != '') and x['classification_3'] == '' else x['classification_3'], axis = 1
             )
 
-            # Filter Updated Data and Non Updated Data EC/WC
-            data_frame_ec_updated = data_frame[data_frame['classification_3'] == 'EC/WC']
-            data_frame_ec_not_updated = data_frame[data_frame['classification_3'] != 'EC/WC']
-
-            # Update ESIC on not updated data only EC/WC
-            data_frame_ec_not_updated['classification_3'] = data_frame_ec_not_updated.apply(
+            data_frame['classification_3'] = data_frame.apply(
                 lambda x : 'ESIC' if ( str(x['ass_ol_esic']).replace(" ", "").replace("NA", "").replace("0", "") != '' or str(x['ass_sr_esic']).replace(" ", "").replace("NA", "").replace("0", "") != '' ) and x['classification_3'] == '' else x['classification_3'], axis = 1
             )
 
-            # Filter Updated Data and Non Updated Data ESIC
-            data_frame_esic_updated = data_frame_ec_not_updated[data_frame_ec_not_updated['classification_3'] == 'ESIC']
-            data_frame_esic_not_updated = data_frame_ec_not_updated[data_frame_ec_not_updated['classification_3'] != 'ESIC']
-
-            # Update No ESIC on not updated data only ESIC
-            data_frame_esic_not_updated['classification_3'] = data_frame_esic_not_updated['classification_3'].apply(
-                lambda x : x if x in ['ESIC', 'EC/WC'] else 'NO EC AND ESIC'
+            data_frame['classification_3'] = data_frame.apply(
+                lambda x : x['classification_3'] if x['classification_3'] in ['EC/WC', 'ESIC'] else 'NO EC AND ESIC', axis=1
             )
 
-            overall_data_frames = [data_frame_ec_updated, data_frame_esic_updated, data_frame_esic_not_updated]
-
-            merged_data_frame = pd.concat(overall_data_frames).sort_index()
-
-            # data_frame.loc[data_frame['ass_ol_emp_comp'] != '', 'classification_3'] = 'EC/WC'
-            # data_frame.loc[data_frame['ass_sr_emp_comp'] != '', 'classification_3'] = 'EC/WC'
-            # data_frame.loc[data_frame['ass_ol_esic'] != '', 'classification_3'] = 'ESIC'
-            # data_frame.loc[data_frame['ass_sr_esic'] != '', 'classification_3'] = 'ESIC'
-
-            # data_frame['classification_3'] = data_frame['classification_3'].apply(
-            #     lambda x : 'NO EC AND ESIC' if x == '' else x
-            # )
-
-            return merged_data_frame
+            return data_frame
         except Exception as e:
             print(e)
-            logging.error("Error in Get Policy Type EC/WC Function!!!", exc_info=True)
+            logging.error("Error in Policy Type Function!!!", exc_info=True)
             return ''
+
+    # def policy_type_1(self, data_frame):
+    #     try:
+    #
+    #         data_frame['classification_3'] = data_frame.apply(
+    #             lambda x : 'EC/WC' if ( str(x['ass_ol_emp_comp']).replace(" ", "").replace("NA", "").replace("0", "") != '' or str(x['ass_sr_emp_comp']).replace(" ", "").replace("NA", "").replace("0", "") != '') and x['classification_3'] == '' else x['classification_3'], axis = 1
+    #         )
+    #
+    #         # Filter Updated Data and Non Updated Data EC/WC
+    #         data_frame_ec_updated = data_frame[data_frame['classification_3'] == 'EC/WC']
+    #         data_frame_ec_not_updated = data_frame[data_frame['classification_3'] != 'EC/WC']
+    #
+    #         # Update ESIC on not updated data only EC/WC
+    #         data_frame_ec_not_updated['classification_3'] = data_frame_ec_not_updated.apply(
+    #             lambda x : 'ESIC' if ( str(x['ass_ol_esic']).replace(" ", "").replace("NA", "").replace("0", "") != '' or str(x['ass_sr_esic']).replace(" ", "").replace("NA", "").replace("0", "") != '' ) and x['classification_3'] == '' else x['classification_3'], axis = 1
+    #         )
+    #
+    #         # Filter Updated Data and Non Updated Data ESIC
+    #         data_frame_esic_updated = data_frame_ec_not_updated[data_frame_ec_not_updated['classification_3'] == 'ESIC']
+    #         data_frame_esic_not_updated = data_frame_ec_not_updated[data_frame_ec_not_updated['classification_3'] != 'ESIC']
+    #
+    #         # Update No ESIC on not updated data only ESIC
+    #         data_frame_esic_not_updated['classification_3'] = data_frame_esic_not_updated['classification_3'].apply(
+    #             lambda x : x if x in ['ESIC', 'EC/WC'] else 'NO EC AND ESIC'
+    #         )
+    #
+    #         overall_data_frames = [data_frame_ec_updated, data_frame_esic_updated, data_frame_esic_not_updated]
+    #
+    #         merged_data_frame = pd.concat(overall_data_frames).sort_index()
+    #
+    #         return merged_data_frame
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Get Policy Type EC/WC Function!!!", exc_info=True)
+    #         return ''
+
+    # def next_month_alcs_deletion_1(self, data_frame, upload_month, upload_year):
+    #     try:
+    #         exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
+    #         exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
+    #
+    #         exit_actual_dol_validated_yes['classification_1'] = exit_actual_dol_validated_yes.apply(
+    #             lambda x: 'Next Month ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) > int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis=1
+    #         )
+    #
+    #         frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
+    #         result = pd.concat(frames).sort_index()
+    #
+    #         return result
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+    #         return ''
+
+    # def alcs_deletion_1(self, data_frame, upload_month, upload_year):
+    #     try:
+    #         exit_actual_dol_validated_yes = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'Yes']
+    #         exit_actual_dol_validated_no = data_frame[data_frame['exit_actual_dol_validate_Yes_or_No'] == 'No']
+    #
+    #         exit_actual_dol_validated_yes['classification_1'] = exit_actual_dol_validated_yes.apply(
+    #             lambda x : 'ALCS Deletion' if int(str(x['exit_actual_dol'].split("-")[1])) <= int(upload_month) and int(str(x['exit_actual_dol']).split("-")[0]) <= int(upload_year) else x['classification_1'], axis = 1
+    #         )
+    #
+    #         frames = [exit_actual_dol_validated_yes, exit_actual_dol_validated_no]
+    #         result = pd.concat(frames).sort_index()
+    #
+    #         return result
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Get ALCS Deletion Function!!!", exc_info=True)
+    #         return ''
+
+    # def next_month_deletion_1(self, data_frame, upload_month, upload_year):
+    #     try:
+    #
+    #         actual_dol_validated_yes = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'Yes']
+    #         actual_dol_validated_no = data_frame[data_frame['ass_actual_dol_validate_Yes_or_No'] == 'No']
+    #
+    #         actual_dol_validated_yes['classification_1'] = actual_dol_validated_yes.apply(
+    #             lambda x : 'Next Month Deletion' if int(str(x['ass_dol']).split("-")[1]) >= int(upload_month) and int(str(x['ass_dol']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
+    #         )
+    #
+    #         frames = [actual_dol_validated_yes, actual_dol_validated_no]
+    #         result = pd.concat(frames).sort_index()
+    #
+    #         return result
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Next Month Deletion Function!!!", exc_info=True)
+
+    # def next_month_addition_1(self, data_frame, upload_month, upload_year):
+    #     try:
+    #         doj_validated_yes = data_frame[data_frame['ass_doj_validate_Yes_or_No'] == 'Yes']
+    #         doj_validated_no = data_frame[data_frame['ass_doj_validate_Yes_or_No'] == 'No']
+    #
+    #         doj_validated_yes['classification_1'] = doj_validated_yes.apply(
+    #             lambda x : 'Next Month Addition' if int(str(x['ass_doj'].split("-")[1])) >= int(upload_month) and int(str(x['ass_doj']).split("-")[0]) >= int(upload_year) else x['classification_1'], axis = 1
+    #         )
+    #
+    #         frames = [doj_validated_yes, doj_validated_no]
+    #         result = pd.concat(frames).sort_index()
+    #
+    #         return result
+    #     except Exception as e:
+    #         print(e)
+    #         logging.error("Error in Get Next Month Addition Function!!!", exc_info=True)
+    #         return ''
