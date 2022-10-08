@@ -89,7 +89,15 @@
 			"mis_ec_industry_sales_force", "mis_new_ec_rates", "mis_updated_date", "mis_updated_name", "mis_gtl_policy", "mis_remarks_2", "mis_ins_company", "mis_pol_start_date",
 			"mis_pol_end_date", "mis_parental_id", "mis_tpa_name", "exit_ass_id", "exit_actual_dol", "death_emp_code"
 		],
-		"date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date", "exit_actual_dol"]
+		"rename_columns_one": ["ass_client_id", "ass_client_name", "ass_emp_no", "ass_associate_name", "ass_email_id", "ass_mobile_number", "ass_gender", "ass_dob", "ass_designation",
+			"ass_ins_comp_name", "ass_doj", "ass_actual_dol", "ass_active_status", "ass_stop_pay_status", "ass_ol_basic", "ass_ol_da", "ass_ol_empf", "ass_ol_emp_comp", "ass_ol_esic",
+			"ass_ol_ctc", "ass_ol_gross", "ass_sr_basic", "ass_sr_da", "ass_sr_empf", "ass_sr_emp_comp", "ass_sr_esic", "ass_sr_ctc", "ass_sr_gross", "ass_sr_effective_date",
+			"ass_client_id_proper", "ass_dol", "mis_sl_no", "mis_corp_id", "mis_client_id", "mis_status", "mis_policy_type", "mis_gmc", "mis_gpa", "mis_premium_cost", "mis_billing_type",
+			"mis_ec_industry", "mis_ec_industry_sales_force", "mis_new_ec_rates", "mis_updated_date", "mis_updated_name", "mis_gtl_policy", "mis_remarks_2", "mis_ins_company",
+			"mis_pol_start_date", "mis_pol_end_date", "mis_parental_id", "mis_tpa_name", "mis_client_id_proper", "death_emp_code"
+		],
+		"date_validation_columns": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date", "exit_actual_dol"],
+		"date_validation_columns_one": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date"]
 	}],
 	"exit_report": [{
 		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\6. Exit_Interview_Report (7).csv",
