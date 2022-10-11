@@ -63,8 +63,8 @@ class Execution:
 
         """ Process """
 
-        # medical_insurance_no_insurance()
-        # medical_insurance_prior_to_policy()
+        medical_insurance_no_insurance()
+        medical_insurance_prior_to_policy()
         medical_insurance_live()
         medical_insurance_deletion()
         medical_insurance_addition_and_deletion()

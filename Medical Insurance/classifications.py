@@ -129,7 +129,9 @@ class Classification:
                     if (data_dict["ass_active_status"].lower() in ['inactive', 'no insurance']) and (data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes"):
                         if data_dict['ass_emp_no'] in inception_data_emp_list:
                             if inception_data_emp_status_list[inception_data_emp_list.index(data_dict['ass_emp_no'])]["status"].lower() in ["active"]:
-                                if int(data_dict['ass_actual_dol'].split("-")[1]) <= int(upload_month) and int(data_dict['ass_actual_dol'].split("-")[0]) <= int(upload_year):
+                                if int(upload_year) > int(data_dict['ass_actual_dol'].split("-")[0]):
+                                    return 'Deletion'
+                                elif int(data_dict['ass_actual_dol'].split("-")[1]) <= int(upload_month) and int(data_dict['ass_actual_dol'].split("-")[0]) == int(upload_year):
                                     return 'Deletion'
                                 else:
                                     return data_dict['classification_1']
@@ -170,18 +172,29 @@ class Classification:
                         if data_dict["ass_actual_dol_validate_Yes_or_No"].lower() == "yes":
                             if data_dict["ass_active_status"].lower() in ["inactive"]:
 
-                                actual_dol_month = int(data_dict["ass_actual_dol"].split("-")[1])
-                                actual_dol_year = int(data_dict["ass_actual_dol"].split("-")[0])
+                                # actual_dol_month = int(data_dict["ass_actual_dol"].split("-")[1])
+                                # actual_dol_year = int(data_dict["ass_actual_dol"].split("-")[0])
+                                #
+                                # policy_start_date_month = int(data_dict["mis_pol_start_date"].split("-")[1])
+                                # policy_start_date_year = int(data_dict["mis_pol_start_date"].split("-")[0])
 
-                                policy_start_date_month = int(data_dict["mis_pol_start_date"].split("-")[1])
-                                policy_start_date_year = int(data_dict["mis_pol_start_date"].split("-")[0])
+                                # if policy_start_date_year > actual_dol_year:
+                                #     if ( data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"] ) and \
+                                #             not ( data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"] ) :
+                                #         return 'Addition and Deletion'
+                                #     else:
+                                #         return data_dict['classification_1']
+                                # elif ( actual_dol_month >= policy_start_date_month and  actual_dol_year == policy_start_date_year):
+                                #     if ( data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"] ) and \
+                                #             not ( data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"] ) :
+                                #         return 'Addition and Deletion'
+                                #     else:
+                                #         return data_dict['classification_1']
 
-                                if ( actual_dol_month >= policy_start_date_month and  actual_dol_year >= policy_start_date_year):
-                                    if ( data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"] ) and \
-                                            not ( data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"] ) :
-                                        return 'Addition and Deletion'
-                                    else:
-                                        return data_dict['classification_1']
+
+                                if (data_dict['ass_actual_dol'] >= data_dict["mis_pol_start_date"]) and \
+                                        not (data_dict["ass_actual_dol"] > data_dict["mis_pol_end_date"]):
+                                    return 'Addition and Deletion'
                                 else:
                                     return data_dict['classification_1']
                             else:
