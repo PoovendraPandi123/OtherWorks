@@ -353,7 +353,7 @@ class Classification:
 
 
             data_frame['classification_1'] = data_frame.apply(
-                lambda x : get_check_next_month_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" and x['classification_1'] == '' else x['classification_1'], axis = 1
+                lambda x : get_check_next_month_addition(x) if x['mis_ins_company'].lower() == "united india insurance company limited" else x['classification_1'], axis = 1
             )
 
             return data_frame

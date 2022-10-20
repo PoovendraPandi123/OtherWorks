@@ -211,3 +211,91 @@ Traceback (most recent call last):
   File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\common.py", line 651, in get_handle
     handle = open(handle, ioargs.mode)
 FileNotFoundError: [Errno 2] No such file or directory: 'H:/Testing/Medical Insurance/A-Testing/Medical Insurance/august-2022/08102022/med_ins_aug_22_data_ptp.xlsx'
+18-10-2022 10:37:51 AM Error in Reading Data in get data from file!!!
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\Packages\read_file.py", line 227, in get_data_from_file
+    data = pd.read_excel(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, engine="pyxlsb", converters=data_column_converter, sheet_name=sheet_name)[attribute_list]
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\util\_decorators.py", line 299, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 344, in read_excel
+    data = io.parse(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 1170, in parse
+    return self._reader.parse(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 488, in parse
+    sheet = self.get_sheet_by_name(asheetname)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_pyxlsb.py", line 50, in get_sheet_by_name
+    self.raise_if_bad_sheet_by_name(name)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 437, in raise_if_bad_sheet_by_name
+    raise ValueError(f"Worksheet named '{name}' not found")
+ValueError: Worksheet named 'STAFFING SR AUG22' not found
+18-10-2022 10:37:51 AM Error in Get Salary Register Function!!!
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\data.py", line 56, in get_salary_register
+    salary_register.rename(columns = salary_register_columns_dict, inplace=True)
+AttributeError: 'NoneType' object has no attribute 'rename'
+18-10-2022 10:55:48 AM Error in Reading Data in get data from file!!!
+Traceback (most recent call last):
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 2789, in _handle_usecols
+    col_indices.append(usecols_key.index(col))
+ValueError: 'EMPF' is not in list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\Packages\read_file.py", line 227, in get_data_from_file
+    data = pd.read_excel(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, engine="pyxlsb", converters=data_column_converter, sheet_name=sheet_name)[attribute_list]
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\util\_decorators.py", line 299, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 344, in read_excel
+    data = io.parse(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 1170, in parse
+    return self._reader.parse(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 543, in parse
+    parser = TextParser(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 2229, in TextParser
+    return TextFileReader(*args, **kwds)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 819, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 1050, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 2310, in __init__
+    ) = self._infer_columns()
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 2723, in _infer_columns
+    columns = self._handle_usecols(columns, columns[0])
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 2791, in _handle_usecols
+    _validate_usecols_names(self.usecols, usecols_key)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\parsers.py", line 1162, in _validate_usecols_names
+    raise ValueError(
+ValueError: Usecols do not match columns, columns expected but not found: ['EMPF', 'DA', 'EMPCOMP', 'Basic']
+18-10-2022 12:01:02 PM Error in Reading Data in get data from file!!!
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\Packages\read_file.py", line 227, in get_data_from_file
+    data = pd.read_excel(file_path, skiprows=int(column_start_row) - 1, usecols=attribute_list, engine="pyxlsb", converters=data_column_converter, sheet_name=sheet_name)[attribute_list]
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\util\_decorators.py", line 299, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 336, in read_excel
+    io = ExcelFile(io, storage_options=storage_options, engine=engine)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 1131, in __init__
+    self._reader = self._engines[engine](self._io, storage_options=storage_options)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_pyxlsb.py", line 28, in __init__
+    super().__init__(filepath_or_buffer, storage_options=storage_options)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 391, in __init__
+    self.book = self.load_workbook(self.handles.handle)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_pyxlsb.py", line 43, in load_workbook
+    return open_workbook(filepath_or_buffer)
+  File "C:\Users\user\Envs\django\lib\site-packages\pyxlsb\__init__.py", line 11, in open_workbook
+    return Workbook(fp=zf, debug=debug)
+  File "C:\Users\user\Envs\django\lib\site-packages\pyxlsb\workbook.py", line 20, in __init__
+    self._parse()
+  File "C:\Users\user\Envs\django\lib\site-packages\pyxlsb\workbook.py", line 34, in _parse
+    with self._zf.open('xl/_rels/workbook.bin.rels', 'r') as zf:
+  File "c:\users\user\appdata\local\programs\python\python39\lib\zipfile.py", line 1502, in open
+    zinfo = self.getinfo(name)
+  File "c:\users\user\appdata\local\programs\python\python39\lib\zipfile.py", line 1429, in getinfo
+    raise KeyError(
+KeyError: "There is no item named 'xl/_rels/workbook.bin.rels' in the archive"
+18-10-2022 12:01:03 PM Error in Writing Inception Data!!!
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\data.py", line 164, in get_inception_data
+    inception_data["Status"] = inception_data.apply(
+AttributeError: 'NoneType' object has no attribute 'apply'

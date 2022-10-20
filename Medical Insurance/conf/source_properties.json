@@ -1,6 +1,6 @@
 {
 	"associate_data": [{
-		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\1. Associate_data_for_Insurance_team (6).xlsb",
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\Associate_data_for_Insurance_team (6).xlsb",
 		"sheet_name": "Associate_data_for_Insurance_te",
 		"source_extension": "xlsb",
 		"source_columns": ["Client Id", "Client Name", "Employee No", "Associate Name", "EmailID", "MobileNo", "Gender", "DOB", "Designation",
@@ -15,8 +15,8 @@
 		"date_key_word": "associate_data"
 	}],
 	"salary_register": [{
-		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\2. STAFFING - Salary Register - AUG22.xlsb",
-		"sheet_name": "STAFFING SR AUG22",
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\STAFFING - Salary Register - SEPT22.xlsb",
+		"sheet_name": "STAFFING SR SEPT22",
 		"source_extension": "xlsb",
 		"source_columns": ["Client ID", "Client Name", "Employee No", "Associate Name", "Gender", "DOB", "Designation", "DOJ", "ACTUAL DOL", "Active Status",
 			"OL_Basic", "OL_DA", "OL_EMPF", "OL_EMPCOMP", "OL_ESIC", "Gross CTC", "Gross Salary", "Basic", "DA", "EMPF", "EMPCOMP", "Gross Earnings", "DOL"
@@ -61,7 +61,7 @@
 		}
 	}],
 	"mis": [{
-		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\3. MIS Final CRF 22-23.xlsb",
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\MIS CRF 22-23.xlsb",
 		"sheet_name": "TL-Staffing",
 		"source_extension": "xlsb",
 		"source_columns": ["SL No", "Corp ID", "ClientID", "Status", "Client Name", "Policy Type", "GMC", "GPA", "Premium Cost", "Billing Type", "EC Industry ",
@@ -100,7 +100,7 @@
 		"date_validation_columns_one": ["ass_dob", "ass_doj", "ass_actual_dol", "ass_sr_effective_date", "ass_dol", "mis_pol_start_date", "mis_pol_end_date"]
 	}],
 	"exit_report": [{
-		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\6. Exit_Interview_Report (7).csv",
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\Exit_Interview_Report (10).csv",
 		"sheet_name": "Exit_Interview_Report (9)",
 		"source_extension": "csv",
 		"source_columns": ["Associate Id", "Employee No", "Actual DOL"],
@@ -110,7 +110,7 @@
 		"date_key_word": "exit_report"
 	}],
 	"death_tracker": [{
-		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\5. Death Report.xlsx",
+		"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\Death Report.xlsx",
 		"sheet_name": "Sheet1",
 		"source_extension": "xlsx",
 		"source_columns": ["Emp Code"],
@@ -122,9 +122,9 @@
 	"insurance_companies": [
 		{
 			"insurance_company": "United India Insurance Company Limited",
-			"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\August\\4. United.xlsb",
+			"file_path": "H:\\Clients\\TeamLease\\Medical Insurance Recon\\2022\\September\\inception_august_2022.xlsx",
 			"sheet_name": "Staffing",
-			"source_extension": "xlsb",
+			"source_extension": "xlsx",
 			"source_columns": ["Sl No", "Emp Code", "Employee/Dependent Name", "Relation", "Gender", "DOB", "Client ID", "Client Name", "D.O.J", "Type", "GMC", "GPA",
 				"Remarks", "Policy DOJ", "Age", "Gross Salary", "Mailing ID", "MobileNo", "DOL", "Policy DOL", "Deln Remarks", "Clarification", "Classification"
 			],
