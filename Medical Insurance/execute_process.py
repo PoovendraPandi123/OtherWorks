@@ -18,6 +18,10 @@ class Execution:
         # get_death_report(file_properties_data = file_properties_data, excel_write_folder_location = excel_write_folder_location)
         # get_inception_data(file_properties_data = file_properties_data, excel_write_folder_location = excel_write_folder_location)
 
+        # Combine all Inception Data
+        # data_path_last_month = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx"
+        # data_path_second_last_month = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_july_2022_proper.xlsx"
+        # get_inception_data_all(data_path_last_month=data_path_last_month, data_path_second_last_month=data_path_second_last_month, excel_write_folder_location=excel_write_folder_location)
 
         """ Merging Data """
 

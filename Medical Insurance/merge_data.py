@@ -125,3 +125,48 @@ def get_create_classification_columns(data_path, excel_write_folder_location):
     except Exception as e:
         print(e)
         logging.error("Error in Get Create Classification Columns!!!", exc_info=True)
+
+def get_update_inception_data_column(data_dict, column_name):
+    try:
+        data_column_name = column_name + "_y"
+        return data_dict[data_column_name]
+
+    except Exception as e:
+        print(e)
+        logging.error("Error in Get Update Inception Data!!!", exc_info=True)
+
+def get_inception_data_all(data_path_last_month, data_path_second_last_month, excel_write_folder_location):
+    try:
+
+        inception_data_last_month = get_read_proper_data(file_location=data_path_last_month)
+        inception_data_second_last_month = get_read_proper_data(file_location=data_path_second_last_month)
+
+        inception_data = pd.merge(inception_data_last_month, inception_data_second_last_month, left_on=['Emp Code'], right_on=['Emp Code'], how='outer', suffixes=('', '_y'))
+
+        inception_data_proper = inception_data.replace(np.nan, '')
+
+        inception_data_columns = list(inception_data_last_month.columns)
+        inception_data_columns.remove('Emp Code')
+        inception_data_columns.remove('Sl No')
+
+        for column in inception_data_columns:
+
+            inception_data_proper[column] = inception_data_proper.apply(
+                lambda x : get_update_inception_data_column(x, column) if x["Sl No"] == '' else x[column], axis=1
+            )
+
+        inception_data_proper['Sl No'] = inception_data_proper.apply(
+            lambda x: get_update_inception_data_column(x, "Sl No") if x["Sl No"] == '' else x["Sl No"], axis=1
+        )
+
+        inception_data_proper.drop(inception_data_proper.filter(regex='_y$').columns, axis=1, inplace=True)
+
+        if get_write_file(data_frame=inception_data_proper, file_name="inception_data_united_all.xlsx", folder_location=excel_write_folder_location):
+            print("Data Inception Written Successfully!!!")
+        else:
+            print("Error in Writing Inception Data!!!")
+
+
+    except Exception as e:
+        print(e)
+        logging.error("Error in Get Inception Data!!!", exc_info=True)

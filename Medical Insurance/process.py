@@ -31,7 +31,7 @@ def medical_insurance_prior_to_policy():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_no_insurance.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -52,7 +52,7 @@ def medical_insurance_live():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_ptp.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -78,7 +78,7 @@ def medical_insurance_deletion():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_live.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -98,7 +98,7 @@ def medical_insurance_addition_and_deletion():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_deletion.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -118,7 +118,7 @@ def medical_insurance_already_deletion():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_addition_and_deletion.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -139,7 +139,7 @@ def medical_insurance_addition():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_already_deletion.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -159,7 +159,7 @@ def medical_insurance_reactivation():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_addition.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -197,7 +197,7 @@ def medical_insurance_next_month_deletion():
     try:
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_next_month_addition.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 
@@ -256,7 +256,7 @@ def medical_insurance_migration_addition():
         excel_write_folder_location = "H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022"
 
         data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/med_ins_sept_2022_data_next_month_deletion.xlsx")
-        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_united_august_2022_proper.xlsx")
+        inception_data = get_read_proper_data(file_location="H:/Testing/Medical Insurance/A-Testing/Medical Insurance/september-2022/18102022/inception_data_united_all.xlsx")
 
         classification = Classification()
 

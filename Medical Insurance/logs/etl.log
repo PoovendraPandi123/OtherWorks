@@ -299,3 +299,27 @@ Traceback (most recent call last):
   File "G:\AdventsProduct\Others\Medical Insurance\data.py", line 164, in get_inception_data
     inception_data["Status"] = inception_data.apply(
 AttributeError: 'NoneType' object has no attribute 'apply'
+27-10-2022 09:17:23 PM Error in Get Write File Function!!!
+Traceback (most recent call last):
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 713, in __new__
+    engine = config.get_option(f"io.excel.{ext}.writer", silent=True)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\_config\config.py", line 233, in __call__
+    return self.__func__(*args, **kwds)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\_config\config.py", line 105, in _get_option
+    key = _get_single_key(pat, silent)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\_config\config.py", line 91, in _get_single_key
+    raise OptionError(f"No such keys(s): {repr(pat)}")
+pandas._config.config.OptionError: "No such keys(s): 'io.excel.xsx.writer'"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\AdventsProduct\Others\Medical Insurance\func.py", line 102, in get_write_file
+    data_frame.to_excel(write_path, index=False)
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\core\generic.py", line 2188, in to_excel
+    formatter.write(
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\formats\excel.py", line 815, in write
+    writer = ExcelWriter(  # type: ignore[abstract]
+  File "C:\Users\user\Envs\django\lib\site-packages\pandas\io\excel\_base.py", line 717, in __new__
+    raise ValueError(f"No engine for filetype: '{ext}'") from err
+ValueError: No engine for filetype: 'xsx'
